@@ -8,6 +8,10 @@ jobs:
       USE_CCACHE: 1
     steps:
       - checkout
+      - run:
+          name: Setup environment
+          command: |
+            echo 'export CCACHE_DIR="$HOME/.ccache"' >> $BASH_ENV
       - restore_cache:
           key: cache-v1-{{ checksum "build.sh" }}
       - run:
