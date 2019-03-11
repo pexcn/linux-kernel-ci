@@ -9,6 +9,9 @@ jobs:
       - run:
           name: Run build
           command: bash build.sh
+      - run:
+          name: Deploy to GitHub releases
+          command: bash release.sh
       - store_artifacts:
           path: dist
           destination: packages
