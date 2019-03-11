@@ -7,7 +7,7 @@ cp ../config/config-4.14.105 .config
 patch -p1 < ../config/0001-prepare-for-tcp-bbr-plus.patch
 scripts/config --disable MODULE_SIG
 scripts/config --disable DEBUG_INFO
-make -j`nproc` deb-pkg
+sudo -E make -j`nproc` deb-pkg
 cd ..
 
 mkdir dist
