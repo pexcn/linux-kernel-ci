@@ -1,0 +1,14 @@
+version: 2
+jobs:
+  build:
+    working_directory: ~/code
+    docker:
+      - image: pexcn/docker-images:stretch
+    steps:
+      - checkout
+      - run:
+          name: Run build
+          command: sudo bash build.sh
+      - store_artifacts:
+          path: deb
+          destination: packages
