@@ -4,23 +4,11 @@ jobs:
     working_directory: ~/code
     docker:
       - image: pexcn/docker-images:stretch-linux-kernel
-    environment:
-      USE_CCACHE: 1
     steps:
       - checkout
       - run:
-          name: Setup environment
-          command: |
-            echo 'export CCACHE_DIR="$HOME/.ccache"' >> $BASH_ENV
-      - restore_cache:
-          key: cache-v1-{{ checksum "build.sh" }}
-      - run:
           name: Run build
           command: bash build.sh
-      - save_cache:
-          key: cache-v1-{{ checksum "build.sh" }}
-          paths:
-            - ~/.ccache
       - store_artifacts:
           path: dist
           destination: packages
