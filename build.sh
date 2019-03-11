@@ -17,8 +17,8 @@ apt-get build-dep linux
 curl -kLs https://cdn.kernel.org/pub/linux/kernel/v4.x/linux-4.14.105.tar.gz | tar zxf -
 
 cd linux-4.14.105
-curl -kLs https://raw.githubusercontent.com/pexcn/share/gh-pages/bbr-plus/config-4.14.105 -o .config
-curl -kLs https://raw.githubusercontent.com/pexcn/share/gh-pages/bbr-plus/0001-patch-for-bbr-plus.patch | patch -p1
+cp ../config-4.14.105 .config
+patch -p1 < ../0001-prepare-for-tcp-bbr-plus.patch
 scripts/config --disable MODULE_SIG
 scripts/config --disable DEBUG_INFO
 make deb-pkg

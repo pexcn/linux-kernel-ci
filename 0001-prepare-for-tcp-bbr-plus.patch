@@ -1,0 +1,39 @@
+From 7932c3d8661b408503be4028e6ebdb7a5889ca62 Mon Sep 17 00:00:00 2001
+From: pexcn <i@pexcn.me>
+Date: Sun, 10 Mar 2019 09:30:32 -0800
+Subject: [PATCH] prepare for tcp bbr plus
+
+---
+ include/net/inet_connection_sock.h | 4 ++--
+ net/ipv4/tcp_output.c              | 1 +
+ 2 files changed, 3 insertions(+), 2 deletions(-)
+
+diff --git a/include/net/inet_connection_sock.h b/include/net/inet_connection_sock.h
+index 13e4c89..8c71f10 100644
+--- a/include/net/inet_connection_sock.h
++++ b/include/net/inet_connection_sock.h
+@@ -136,8 +136,8 @@ struct inet_connection_sock {
+ 	} icsk_mtup;
+ 	u32			  icsk_user_timeout;
+ 
+-	u64			  icsk_ca_priv[88 / sizeof(u64)];
+-#define ICSK_CA_PRIV_SIZE      (11 * sizeof(u64))
++	u64			  icsk_ca_priv[112 / sizeof(u64)];
++#define ICSK_CA_PRIV_SIZE      (14 * sizeof(u64))
+ };
+ 
+ #define ICSK_TIME_RETRANS	1	/* Retransmit timer */
+diff --git a/net/ipv4/tcp_output.c b/net/ipv4/tcp_output.c
+index 24bad63..10fcec6 100644
+--- a/net/ipv4/tcp_output.c
++++ b/net/ipv4/tcp_output.c
+@@ -1821,6 +1821,7 @@ static bool tcp_snd_wnd_test(const struct tcp_sock *tp,
+ 
+ 	return !after(end_seq, tcp_wnd_end(tp));
+ }
++EXPORT_SYMBOL(tcp_snd_wnd_test);
+ 
+ /* Trim TSO SKB to LEN bytes, put the remaining data into a new packet
+  * which is put after SKB on the list.  It is very much like
+-- 
+2.11.0
