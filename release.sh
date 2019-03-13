@@ -1,16 +1,14 @@
 #!/bin/bash -e
 
-export GOPATH="$HOME/go"
-export PATH="$GOPATH/bin:$PATH"
+API_URL="https://api.github.com/repos/tcnksm/ghr/releases/latest"
+TAG=$(curl -s $API_URL | grep "tag_name" | sed -E 's/.*"([^"]+)".*/\1/')
+DOWNLOAD_URL=$(curl -s $API_URL | grep "browser_download_url" | grep "linux" | grep "amd64" | cut -d '"' -f 4)
 
-sudo apt-get update
-sudo apt-get install golang -t stretch-backports --no-install-recommends -y
+curl -kLs $DOWNLOAD_URL | tar zxf - -C /usr/local/bin/ ghr_${TAG}_linux_amd64/ghr --strip-components 1
 
-go get -u github.com/tcnksm/ghr
-
-ghr -t ${GITHUB_TOKEN} \
-    -u ${CIRCLE_PROJECT_USERNAME} \
-    -r ${CIRCLE_PROJECT_REPONAME} \
-    -c ${CIRCLE_SHA1} \
+ghr -t $GITHUB_TOKEN \
+    -u $CIRCLE_PROJECT_USERNAME \
+    -r $CIRCLE_PROJECT_REPONAME \
+    -c $CIRCLE_SHA1 \
     -delete \
-    ${KERNEL_VERSION} dist
+    $KERNEL_VERSION dist
