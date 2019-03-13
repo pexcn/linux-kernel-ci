@@ -18,9 +18,27 @@ jobs:
       - store_artifacts:
           path: dist
           destination: packages
+  "4.19.28":
+    working_directory: ~/code
+    docker:
+      - image: pexcn/docker-images:stretch-linux-kernel
+    environment:
+      KERNEL_VERSION: 4.19.28
+    steps:
+      - checkout
+      - run:
+          name: Run build
+          command: bash build.sh
+      - run:
+          name: Deploy to GitHub releases
+          command: bash release.sh
+      - store_artifacts:
+          path: dist
+          destination: packages
 
 workflows:
   version: 2
   build:
     jobs:
       - "4.14.105"
+      - "4.19.28"
