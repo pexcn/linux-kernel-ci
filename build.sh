@@ -16,9 +16,3 @@ scripts/config --disable MODULE_SIG
 scripts/config --disable DEBUG_INFO
 make -j`nproc` deb-pkg
 cd ..
-
-# copy dist files
-mkdir dist
-cp linux-headers*.deb dist/
-cp linux-image*.deb dist/
-cp linux-libc-dev*.deb dist/
