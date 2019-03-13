@@ -1,15 +1,20 @@
 #!/bin/bash -e
 
-curl -kLs https://cdn.kernel.org/pub/linux/kernel/v4.x/linux-4.14.105.tar.gz | tar zxf -
+# download sources
+curl -kLs https://cdn.kernel.org/pub/linux/kernel/v${KERNEL_VERSION:0:1}.x/linux-$KERNEL_VERSION.tar.gz | tar zxf -
 
-cd linux-4.14.105
-cp ../config/config-4.14.105 .config
-patch -p1 < ../config/0001-prepare-for-tcp-bbr-plus.patch
+# prepare config & apply patch
+cp config/$KERNEL_VERSION/config-$KERNEL_VERSION linux-$KERNEL_VERSION/.config
+find patches/$KERNEL_VERSION -type f -name "*.patch" | sort -n | xargs cat | patch -p1 -d linux-$KERNEL_VERSION
+
+# build kernel
+cd linux-$KERNEL_VERSION
 scripts/config --disable MODULE_SIG
 scripts/config --disable DEBUG_INFO
 sudo -E make -j`nproc` deb-pkg
 cd ..
 
+# copy dist files
 mkdir dist
 cp linux-headers*.deb dist/
 cp linux-image*.deb dist/

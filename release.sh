@@ -2,7 +2,6 @@
 
 export GOPATH="$HOME/go"
 export PATH="$GOPATH/bin:$PATH"
-export VERSION=$(date +'%Y%m%d')
 
 sudo apt-get update
 sudo apt-get install golang -t stretch-backports --no-install-recommends -y
@@ -14,4 +13,4 @@ ghr -t ${GITHUB_TOKEN} \
     -r ${CIRCLE_PROJECT_REPONAME} \
     -c ${CIRCLE_SHA1} \
     -delete \
-    ${VERSION} dist
+    ${KERNEL_VERSION} dist

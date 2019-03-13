@@ -1,9 +1,12 @@
 version: 2
+
 jobs:
-  build:
+  "4.14.105":
     working_directory: ~/code
     docker:
       - image: pexcn/docker-images:stretch-linux-kernel
+    environment:
+      KERNEL_VERSION: 4.14.105
     steps:
       - checkout
       - run:
@@ -15,3 +18,9 @@ jobs:
       - store_artifacts:
           path: dist
           destination: packages
+
+workflows:
+  version: 2
+  build:
+    jobs:
+      - "4.14.105"
