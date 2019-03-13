@@ -12,7 +12,7 @@ cd linux-$KERNEL_VERSION
 make oldconfig
 scripts/config --disable MODULE_SIG
 scripts/config --disable DEBUG_INFO
-sudo -E make -j`nproc` deb-pkg
+make -j`nproc` deb-pkg
 cd ..
 
 # copy dist files
