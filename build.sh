@@ -5,7 +5,9 @@ curl -kLs https://cdn.kernel.org/pub/linux/kernel/v${KERNEL_VERSION:0:1}.x/linux
 
 # prepare config & apply patch
 cp config/$KERNEL_VERSION/config-$KERNEL_VERSION linux-$KERNEL_VERSION/.config
-find patches/$KERNEL_VERSION -type f -name "*.patch" | sort -n | xargs cat | patch -p1 -d linux-$KERNEL_VERSION
+if [ -d "patches/$KERNEL_VERSION" ]; then
+  find patches/$KERNEL_VERSION -type f -name "*.patch" | sort -n | xargs cat | patch -p1 -d linux-$KERNEL_VERSION
+fi
 
 # build kernel
 cd linux-$KERNEL_VERSION
