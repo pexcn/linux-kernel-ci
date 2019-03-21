@@ -16,7 +16,7 @@ jobs:
           name: Deploy to GitHub releases
           command: bash release.sh
       - store_artifacts:
-          path: dist
+          path: release
           destination: packages
   "4.14.105":
     working_directory: ~/code
@@ -33,7 +33,7 @@ jobs:
           name: Deploy to GitHub releases
           command: bash release.sh
       - store_artifacts:
-          path: dist
+          path: release
           destination: packages
   "4.19.28":
     working_directory: ~/code
@@ -50,7 +50,7 @@ jobs:
           name: Deploy to GitHub releases
           command: bash release.sh
       - store_artifacts:
-          path: dist
+          path: release
           destination: packages
 
 workflows:
