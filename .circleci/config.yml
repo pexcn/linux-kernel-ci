@@ -1,12 +1,12 @@
 version: 2
 
 jobs:
-  "4.9.162":
+  "4.9.184":
     working_directory: ~/linux-kernel-ci
     docker:
       - image: pexcn/docker-images:stretch-linux-kernel
     environment:
-      KERNEL_VERSION: 4.9.162
+      KERNEL_VERSION: 4.9.184
     steps:
       - checkout
       - run:
@@ -57,6 +57,6 @@ workflows:
   version: 2
   build:
     jobs:
-      - "4.9.162"
+      - "4.9.184"
       - "4.14.105"
       - "4.19.28"
