@@ -11,6 +11,7 @@ cp linux-firmware-image*.deb release/ 2>/dev/null || true
 cp linux-headers*.deb release/ 2>/dev/null || true
 cp linux-image*.deb release/ 2>/dev/null || true
 cp linux-libc-dev*.deb release/ 2>/dev/null || true
+cp linux-*.changes release/ 2>/dev/null || true
 
 ghr -t $GITHUB_TOKEN \
   -u $CIRCLE_PROJECT_USERNAME \
