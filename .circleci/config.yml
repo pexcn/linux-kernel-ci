@@ -52,12 +52,12 @@ jobs:
       - store_artifacts:
           path: release
           destination: packages
-  "5.1.15":
+  "5.2.8":
     working_directory: ~/linux-kernel-ci
     docker:
       - image: pexcn/docker-images:stretch-linux-kernel
     environment:
-      KERNEL_VERSION: 5.1.15
+      KERNEL_VERSION: 5.2.8
     steps:
       - checkout
       - run:
@@ -77,4 +77,4 @@ workflows:
       - "4.9.189"
       - "4.14.138"
       - "4.19.66"
-      - "5.1.15"
+      - "5.2.8"
