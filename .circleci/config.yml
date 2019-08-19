@@ -1,23 +1,6 @@
 version: 2
 
 jobs:
-  "4.9.189":
-    working_directory: ~/linux-kernel-ci
-    docker:
-      - image: pexcn/docker-images:stretch-linux-kernel
-    environment:
-      KERNEL_VERSION: 4.9.189
-    steps:
-      - checkout
-      - run:
-          name: Run build
-          command: bash build.sh
-      - run:
-          name: Deploy
-          command: bash deploy.sh
-      - store_artifacts:
-          path: release
-          destination: packages
   "4.14.138":
     working_directory: ~/linux-kernel-ci
     docker:
@@ -74,7 +57,6 @@ workflows:
   version: 2
   build:
     jobs:
-      - "4.9.189"
       - "4.14.138"
       - "4.19.66"
       - "5.2.8"
