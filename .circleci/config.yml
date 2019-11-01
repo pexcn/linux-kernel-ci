@@ -23,7 +23,7 @@ jobs:
     docker:
       - image: pexcn/docker-images:stretch-linux-kernel
     environment:
-      KERNEL_VERSION: 5.2.9
+      KERNEL_VERSION: 5.3.8
     steps:
       - checkout
       - run:
