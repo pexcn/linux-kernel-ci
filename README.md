@@ -12,4 +12,4 @@
 
 ### 5.x
 
-- Based on debian stretch [kernel](https://packages.debian.org/stretch/linux-image-4.9.0-11-amd64) config.
+- Based on debian buster [kernel](https://packages.debian.org/buster/linux-image-4.19.0-6-amd64) config.
