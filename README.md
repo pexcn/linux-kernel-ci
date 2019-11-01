@@ -12,4 +12,4 @@
 
 ### 5.x
 
-- Based on debian buster [kernel](https://packages.debian.org/buster-backports/linux-image-5.2.0-0.bpo.3-amd64) config.
+- Based on debian buster [kernel](https://packages.debian.org/buster/linux-image-4.19.0-6-amd64) config.
